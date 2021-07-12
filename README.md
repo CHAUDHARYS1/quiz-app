@@ -4,9 +4,9 @@
 
 Build a timed coding quiz with multiple-choice questions. This app will run in the browser, and features dynamically updated HTML and CSS powered by JavaScript
 
-- [x]
-- [x]
-- [x]
+- [ ] Timer works as soon as user starts the quiz.
+- [ ] When user answers a question, the next question appears.
+- [ ] Application is responsive to all screen sizes.
 
 ### User Story
 
@@ -16,7 +16,7 @@ SO **THAT** I can gauge my progress compared to my peers
 
 ### Website
 
-https://chaudharys1.github.io/pass-generator/
+Pending complete of project
 
 ### Mock-up
 

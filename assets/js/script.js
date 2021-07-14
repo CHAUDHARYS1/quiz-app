@@ -5,12 +5,36 @@
 // when all questions are answered or timer reaches 0 for any question - the game is over. 
 // when game is over - save user score.
 
+var questions = [
+    { q: 'Commonly used data types DO NOT include', a: 'boolean' },
+    { q: 'The condition in an if/else statement is enclosed with ______.', a: 'parenthesis' },
+    { q: 'Arrays in Javascript can be used to store ______', a: 'all of the above' },
+    { q: 'String values must be enclosed within _____ when being assigned to variables.', a: 'quotes' },
+    { q: 'A very useful tool used during development and debugging for printing content to the debugger is', a: 'console.log' },
+] 
 
-var startBtn = document.querySelector("#start-quiz-btn");
-console.log(startBtn);
+// start score from 0
+var score = 0;
 
-var startTimer = function(){
-    var timerValue = document.querySelector("#timer");
+// start timer at 75
+var timer = 75;
+var startQuizBtn = document.querySelector("#start-quiz-btn");
+var mainEl = document.querySelector("main");
 
-    console.log(startTimer);
+// start the quiz when 'Start Quiz' button is pressed
+var startQuiz = function(){
+    console.log("I was clicked");
 }
+
+var createQuizMainEl = function(){
+    var mainDivEl = document.createElement("main");
+    mainDivEl.innerHTML = "<h2>Hi Its me </h2";
+
+    var mainHeadingEl = document.createElement("h1");
+    mainHeadingEl.className = "main-h1";
+    mainHeadingEl.innerHTML = "JavaScript Quiz Challenge";
+    mainHeadingEl.appendChild(mainDivEl);
+
+}
+createQuizMainEl();
+startQuizBtn.addEventListener("click", startQuiz);

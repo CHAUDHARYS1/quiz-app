@@ -20,5 +20,5 @@ Pending complete of project
 
 ### Mock-up
 
-The following image demonstatres the application apperance.
+The following image demonstrates the application apperance.
 ![thumbnail](https://user-images.githubusercontent.com/39867916/125209861-8d952900-e261-11eb-8889-e6eda32fdcde.jpg)

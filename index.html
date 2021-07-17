@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,22 +7,34 @@
     <title>JavaScript Quiz</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
     <div class="quiz-navigation">
         <div class="highscore">
             <button id="highscore-btn">View high score</button>
         </div>
         <div class="timer">
-            <p id="timer">Time</p>    
+            <p id="timer">Time</p>
         </div>
     </div>
     <main>
-        <h1></h1>
-        <h2>
-            Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds! 
-        </h2>
-        <button id="start-quiz-btn">Start Quiz</button>
+        <div id="introduction">
+            <h1>Coding Quiz Challenge</h1>
+            <h2>
+                Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                answers will penalize your score/time by ten seconds!
+            </h2>
+            <button id="start-quiz-btn">Start Quiz</button>
+        </div>
+
+        <div class="question-container">
+            <h2 id="questions"></h2>
+            <ul id="answer-list">
+            </ul>
+        </div>
     </main>
+
     <script src="assets/js/script.js"></script>
 </body>
-</html> 
+
+</html>

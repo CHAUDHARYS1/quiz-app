@@ -7,34 +7,45 @@
 
 var questions = [{
         q: 'Commonly used data types DO NOT include',
-        a: 'boolean',
-        b: 'argument',
-        c: 'test',
-        d: 'param'
+        a: 'booleans',
+        b: 'strings',
+        c: 'alerts',
+        d: 'numbers'
     },
     {
         q: 'The condition in an if/else statement is enclosed with ______.',
-        a: 'parenthesis'
+        a: 'quotes',
+        b: 'curly brackets',
+        c: 'parenthesis',
+        d: 'square brackets'
     },
     {
         q: 'Arrays in Javascript can be used to store ______',
-        a: 'all of the above'
+        a: 'all of the above',
+        b: 'other arrays',
+        c: 'booleans',
+        d: 'numbers and strings'
     },
     {
         q: 'String values must be enclosed within _____ when being assigned to variables.',
-        a: 'quotes'
+        a: 'quotes',
+        b: 'commas',
+        c: 'curly brackets',
+        d: 'parenthesis'
     },
     {
         q: 'A very useful tool used during development and debugging for printing content to the debugger is',
-        a: 'console.log'
+        a: 'console.log',
+        b: 'javascript',
+        c: 'terminal/bash',
+        d: 'for loops'
     },
 ]
 
 // start score from 0
 var score = 0;
-
+var scoreIncrement = 10;
 // start timer at 75
-var timer = 75;
 
 // select 'start quiz' button 
 var startQuizBtn = document.querySelector("#start-quiz-btn");
@@ -52,10 +63,22 @@ var displayedQuestion = 0;
 function startQuiz() {
     mainEl.style.display = 'none';
     questionEl.style.display = 'block';
-
+    startTimer();
     renderQuestion(questions[displayedQuestion]);
 }
+// start timer as soon as 'Start Quiz' button is pressed
+function startTimer() {
+    var timerEl = document.querySelector("#timer");
+    var seconds = 75;
+    var cancel = setInterval(() => {
+        if (seconds <= 1) {
+            clearInterval(cancel);
+        }
+        timerEl.innerHTML = `${--seconds}`;
+    }, 1000)
+}
 
+// render question as soon as 'Start Quiz' button is pressed
 function renderQuestion(question) {
     questionHeading.innerHTML = question.q;
     // answerList.innerHTML = question.a;
@@ -80,13 +103,12 @@ function nextQuestion(e) {
     console.log(usersChoice);
 
     if (usersChoice === questions[displayedQuestion].a) {
-
+        alert("Corret answer");
+        
     } else {
-
+        alert('Wrong answer');
     }
 
-    displayedQuestion++;
-    // after line, call renderQuestion(questions[displayedQuestions])
 }
 
 answerList.addEventListener("click", nextQuestion);

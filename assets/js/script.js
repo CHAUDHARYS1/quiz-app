@@ -45,7 +45,6 @@ var questions = [{
 // start score from 0
 var score = 0;
 var scoreIncrement = 10;
-// start timer at 75
 
 // select 'start quiz' button 
 var startQuizBtn = document.querySelector("#start-quiz-btn");
@@ -58,6 +57,11 @@ var questionHeading = document.querySelector("#questions");
 var answerList = document.querySelector("#answer-list");
 
 var displayedQuestion = 0;
+
+ // start the countdown from 75
+ var timerEl = document.querySelector("#timer");
+ var seconds = 75;
+ var secondsDeduction = 10;
 
 // start the quiz when 'Start Quiz' button is pressed
 function startQuiz() {
@@ -72,9 +76,7 @@ function startTimer() {
     var displayTimer = document.querySelector(".timer");
     displayTimer.style.display = 'block';
 
-    // start the countdown from 75
-    var timerEl = document.querySelector("#timer");
-    var seconds = 75;
+   // start the countdown
     var cancel = setInterval(() => {
         if (seconds <= 1) {
             clearInterval(cancel);
@@ -88,8 +90,6 @@ function startTimer() {
             return false;
         }
     }, 1000);
-
-
 }
 
 // render question as soon as 'Start Quiz' button is pressed
@@ -118,9 +118,10 @@ function nextQuestion(e) {
 
     if (usersChoice === questions[displayedQuestion].a) {
         alert("Corret answer");
-
     } else {
-        alert('Wrong answer');
+        alert('Wrong answer, -10 sec.');
+        var wrongAnswer = timerEl - secondsDeduction;
+        timerEl.append(wrongAnswer);
     }
 
 }

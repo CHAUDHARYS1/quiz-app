@@ -4,7 +4,7 @@
 
 Build a timed coding quiz with multiple-choice questions. This app will run in the browser, and features dynamically updated HTML and CSS powered by JavaScript
 
-- [ ] Timer works as soon as user starts the quiz.
+- [x] Timer works as soon as user starts the quiz.
 - [ ] When user answers a question, the next question appears.
 - [ ] Application is responsive to all screen sizes.
 

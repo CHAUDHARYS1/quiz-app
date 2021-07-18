@@ -29,6 +29,7 @@ body {
 .timer {
   padding: 20px;
   font-size: 22px;
+  display: none;
 }
 main {
   text-align: center;
@@ -53,10 +54,41 @@ h2 {
   border-radius: 10px;
   color: white;
   margin-top: 20px;
+  cursor: pointer;
+}
+#start-quiz-btn:hover{
+  background-color: var(--secondary-color);
 }
 
 /*  */
 
 .question-container{
   display: none;
+}
+.question-container h2{
+  text-align: left;
+  font-size: 32px;
+}
+.question-container ul{
+  list-style-type: none;
+  text-align: left;
+}
+.question-container ul li {
+  background-color: var(--primary-color);
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.question-container ul li:hover{
+  background-color: var(--secondary-color);
+}
+/* Rules */
+.rules{
+  margin: 0 auto;
+  width: 70%;
+  margin-top: 100px;
+  border: 1px dashed grey;
+  padding: 0px 10px 10px 10px;
 }

@@ -68,6 +68,11 @@ function startQuiz() {
 }
 // start timer as soon as 'Start Quiz' button is pressed
 function startTimer() {
+    // display timer 
+    var displayTimer = document.querySelector(".timer");
+    displayTimer.style.display = 'block';
+
+    // start the countdown from 75
     var timerEl = document.querySelector("#timer");
     var seconds = 75;
     var cancel = setInterval(() => {
@@ -75,7 +80,16 @@ function startTimer() {
             clearInterval(cancel);
         }
         timerEl.innerHTML = `${--seconds}`;
-    }, 1000)
+        if (seconds === 0) {
+            alert("You ran out of time. Good luck next time!\n\nThe page will now redirect to the main page.");
+
+            // reload the page back the main section
+            location.reload();
+            return false;
+        }
+    }, 1000);
+
+
 }
 
 // render question as soon as 'Start Quiz' button is pressed
@@ -104,7 +118,7 @@ function nextQuestion(e) {
 
     if (usersChoice === questions[displayedQuestion].a) {
         alert("Corret answer");
-        
+
     } else {
         alert('Wrong answer');
     }

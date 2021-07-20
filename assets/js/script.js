@@ -119,9 +119,10 @@ function nextQuestion(e) {
     if (usersChoice === questions[displayedQuestion].a) {
         alert("Corret answer");
     } else {
-        alert('Wrong answer, -10 sec.');
-        var wrongAnswer = timerEl - secondsDeduction;
-        timerEl.append(wrongAnswer);
+        alert('Wrong answer, 10 seconds has been deducted from the countdown.');
+        seconds -= secondsDeduction;
+        // timerEl.innerText = seconds;
+        // timerEl.append(wrongAnswer);
     }
 
 }

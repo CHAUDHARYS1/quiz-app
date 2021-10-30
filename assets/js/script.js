@@ -121,10 +121,10 @@ function nextQuestion(e) {
     } else {
         alert('Wrong answer, 10 seconds has been deducted from the countdown.');
         seconds -= secondsDeduction;
-        // timerEl.innerText = seconds;
-        // timerEl.append(wrongAnswer);
     }
-
+    for (var i = 0; i < questions.length; i++){
+        console.log(questions);
+    } 
 }
 
 answerList.addEventListener("click", nextQuestion);

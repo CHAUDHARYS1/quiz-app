@@ -1,75 +1,26 @@
-// start quiz btn will take user to their first question
-// once start quiz btn is clicked - the timer starts
-// each question has a 60 second timer.
-// If user answers the question wrong, they lose 10 seconds out of 60 second timer.
-// when all questions are answered or timer reaches 0 for any question - the game is over. 
-// when game is over - save user score.
 
-var questions = [{
-        q: 'Commonly used data types DO NOT include',
-        a: 'booleans',
-        b: 'strings',
-        c: 'alerts',
-        d: 'numbers'
-    },
-    {
-        q: 'The condition in an if/else statement is enclosed with ______.',
-        a: 'quotes',
-        b: 'curly brackets',
-        c: 'parenthesis',
-        d: 'square brackets'
-    },
-    {
-        q: 'Arrays in Javascript can be used to store ______',
-        a: 'all of the above',
-        b: 'other arrays',
-        c: 'booleans',
-        d: 'numbers and strings'
-    },
-    {
-        q: 'String values must be enclosed within _____ when being assigned to variables.',
-        a: 'quotes',
-        b: 'commas',
-        c: 'curly brackets',
-        d: 'parenthesis'
-    },
-    {
-        q: 'A very useful tool used during development and debugging for printing content to the debugger is',
-        a: 'console.log',
-        b: 'javascript',
-        c: 'terminal/bash',
-        d: 'for loops'
-    },
-]
+// // start score from 0
+// var score = 0;
+// var scoreIncrement = 10;
 
-// start score from 0
-var score = 0;
-var scoreIncrement = 10;
+// // select 'start quiz' button 
+// var startQuizBtn = document.querySelector("#start-quiz-btn");
+// // select div containerelement
+// var mainEl = document.querySelector("#introduction");
+// //
+// var questionEl = document.querySelector(".question-container");
 
-// select 'start quiz' button 
-var startQuizBtn = document.querySelector("#start-quiz-btn");
-// select div containerelement
-var mainEl = document.querySelector("#introduction");
-//
-var questionEl = document.querySelector(".question-container");
+// var questionHeading = document.querySelector("#questions");
+// var answerList = document.querySelector("#answer-list");
 
-var questionHeading = document.querySelector("#questions");
-var answerList = document.querySelector("#answer-list");
-
-var displayedQuestion = 0;
+// var displayedQuestion = 0;
 
  // start the countdown from 75
  var timerEl = document.querySelector("#timer");
  var seconds = 75;
  var secondsDeduction = 10;
 
-// start the quiz when 'Start Quiz' button is pressed
-function startQuiz() {
-    mainEl.style.display = 'none';
-    questionEl.style.display = 'block';
-    startTimer();
-    renderQuestion(questions[displayedQuestion]);
-}
+
 // start timer as soon as 'Start Quiz' button is pressed
 function startTimer() {
     // display timer 
@@ -92,40 +43,130 @@ function startTimer() {
     }, 1000);
 }
 
-// render question as soon as 'Start Quiz' button is pressed
-function renderQuestion(question) {
-    questionHeading.innerHTML = question.q;
-    // answerList.innerHTML = question.a;
 
-    var answerListOneEl = document.createElement("li");
-    answerListOneEl.innerHTML = question.a;
+const startButton = document.getElementById('start-btn')
+const nextButton = document.getElementById('next-btn')
+const questionContainerElement = document.getElementById('question-container')
+const questionElement = document.getElementById('question')
+const answerButtonsElement = document.getElementById('answer-buttons')
 
-    var answerListTwoEl = document.createElement("li");
-    answerListTwoEl.innerHTML = question.b;
+let shuffledQuestions, currentQuestionIndex
 
-    var answerListThreeEl = document.createElement("li");
-    answerListThreeEl.innerHTML = question.c;
+startButton.addEventListener('click', startGame)
+nextButton.addEventListener('click', () => {
+  currentQuestionIndex++
+  setNextQuestion()
+})
 
-    var answerListFourEl = document.createElement("li");
-    answerListFourEl.innerHTML = question.d;
-
-    answerList.append(answerListOneEl, answerListTwoEl, answerListThreeEl, answerListFourEl);
+function startGame() {
+  startButton.classList.add('hide')
+  shuffledQuestions = questions.sort(() => Math.random() - .5)
+  currentQuestionIndex = 0
+  questionContainerElement.classList.remove('hide')
+  setNextQuestion()
+  startTimer()
 }
 
-function nextQuestion(e) {
-    var usersChoice = e.target.textContent;
-    console.log(usersChoice);
+function setNextQuestion() {
+  resetState()
+  showQuestion(shuffledQuestions[currentQuestionIndex])
+}
 
-    if (usersChoice === questions[displayedQuestion].a) {
-        alert("Corret answer");
-    } else {
-        alert('Wrong answer, 10 seconds has been deducted from the countdown.');
-        seconds -= secondsDeduction;
+function showQuestion(question) {
+  questionElement.innerText = question.question
+  question.answers.forEach(answer => {
+    const button = document.createElement('button')
+    button.innerText = answer.text
+    button.classList.add('btn')
+    if (answer.correct) {
+      button.dataset.correct = answer.correct
     }
-    for (var i = 0; i < questions.length; i++){
-        console.log(questions);
-    } 
+    button.addEventListener('click', selectAnswer)
+    answerButtonsElement.appendChild(button)
+  })
 }
 
-answerList.addEventListener("click", nextQuestion);
-startQuizBtn.addEventListener("click", startQuiz);
+function resetState() {
+  clearStatusClass(document.body)
+  nextButton.classList.add('hide')
+  while (answerButtonsElement.firstChild) {
+    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+  }
+}
+
+function selectAnswer(e) {
+  const selectedButton = e.target
+  const correct = selectedButton.dataset.correct
+  setStatusClass(document.body, correct)
+  Array.from(answerButtonsElement.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct)
+  })
+  if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove('hide')
+  } else {
+    startButton.innerText = 'Restart'
+    startButton.classList.remove('hide')
+  }
+}
+
+function setStatusClass(element, correct) {
+  clearStatusClass(element)
+  if (correct) {
+    element.classList.add('correct')
+  } else {
+    element.classList.add('wrong')
+  }
+}
+
+function clearStatusClass(element) {
+  element.classList.remove('correct')
+  element.classList.remove('wrong')
+}
+
+const questions = [
+  {
+    question: 'Commonly used data types DO NOT include:',
+    answers: [
+      { text: 'booleans', correct: true },
+      { text: 'strings', correct: false },
+      { text: 'alerts', correct: false },
+      { text: 'numbers', correct: false }
+    ]
+  },
+  {
+    question: 'The condition in an if/else statement is enclosed with ______.',
+    answers: [
+      { text: 'quotes', correct: true },
+      { text: 'curly brackets', correct: true },
+      { text: 'parenthesis', correct: true },
+      { text: 'square brackets', correct: true }
+    ]
+  },
+  {
+    question: 'Arrays in Javascript can be used to store ______',
+    answers: [
+      { text: 'all of the above', correct: false },
+      { text: 'other arrays', correct: true },
+      { text: 'booleans', correct: false },
+      { text: 'numbers and strings', correct: false }
+    ]
+  },
+  {
+    question: 'String values must be enclosed within _____ when being assigned to variables.',
+    answers: [
+      { text: 'quotes', correct: false },
+      { text: 'commas', correct: true },
+      { text: 'curly brackets', correct: false },
+      { text: 'parenthesis', correct: true }
+    ]
+  },
+  {
+    question: 'A very useful tool used during development and debugging for printing content to the debugger is',
+    answers: [
+      { text: 'console.log', correct: false },
+      { text: 'javascript', correct: true },
+      { text: 'terminal/bash', correct: false },
+      { text: 'for loops', correct: true }
+    ]
+  }
+]

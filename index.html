@@ -23,7 +23,7 @@
             <p>You have 75 seconds to finish the quiz. There are 5 questions, each if answered correctly should get you total point of 50 points.If any questions are answered incorrectly, 10 seconds are deducted from your countdown.</p>
     </main>
     <br>
-    <div class="container">
+    <div id="quiz-container" class="container">
         <div class="quiz-navigation">
             <div class="timer">
               <p>Seconds: <span id="timer">75</span></p>  
@@ -42,6 +42,16 @@
           <button id="start-btn" class="start-btn btn">Start</button>
           <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
+      </div>
+
+      <div id="score-container" class="container hide">
+          <div id="display-score">
+              <p id="score"></p>
+          </div>
+          <form>
+            <input type="text" name="name" placeholder="Name" id="name">
+            <button type="submit">Submit</button>
+          </form>
       </div>
 
     <script src="assets/js/script.js" defer></script>

@@ -44,9 +44,13 @@ body {
 }
 /* .btn.correct {
   background-color: var(--green);
+} */
+.btn-active{
+  background-color: var(--grey);
+  border: 1px solid black;
 }
 
-.btn.wrong {
+/* .btn.wrong {
   background-color: var(--red);
 } */
 
